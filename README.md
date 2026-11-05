@@ -6,7 +6,10 @@ Turn an old laptop or PC into an always-on Claude Code machine you can use from 
   <img src="images/laptop.jpg" alt="Old HP laptop, lid closed and plugged in, running 24/7" width="49%">
   <img src="images/desktop.png" alt="The machine's desktop over VNC: always-on checks passing, VNC, Tailscale and Claude Remote Control running" width="49%">
 </p>
-<p align="center"><sub>The real machine: lid closed on the desk, and its live desktop seen over VNC.</sub></p>
+<p align="center">
+  <img src="images/claude-desktop-remote-control.png" alt="Claude desktop app on the home machine with a Claude Code session open and Remote Control switched on" width="98.5%">
+</p>
+<p align="center"><sub>The real machine: lid closed on the desk, its live desktop seen over VNC, and a Claude Code session in the Claude desktop app with Remote Control on (highlighted, private content blurred).</sub></p>
 
 Based on a real build (HP laptop, Xubuntu 26.04 LTS, Nov 2026).
 
@@ -111,13 +114,8 @@ Claude RC is what lets you start and drive Claude Code sessions on this machine 
 
 So I use both:
 
-- **For browser work:** I start two or three Claude Code sessions in the Claude desktop app on this machine and turn on **Remote Control** for each one (the toggle in the session's side panel). They then show up in the Claude app on my phone and on any other device, and I use them interchangeably for anything that needs the browser.
+- **For browser work:** I start two or three Claude Code sessions in the Claude desktop app on this machine and turn on **Remote Control** for each one (the toggle in the session's side panel, shown in the screenshot at the top). They then show up in the Claude app on my phone and on any other device, and I use them interchangeably for anything that needs the browser.
 - **For everything else:** I start a new session from my phone (or any device) in the folder where `claude rc` is running.
-
-<p align="center">
-  <img src="images/claude-desktop-remote-control.png" alt="Claude desktop app on the home machine with a Claude Code session open and Remote Control switched on" width="80%">
-</p>
-<p align="center"><sub>A Claude Code session in the desktop app with Remote Control on (highlighted). Private content is blurred.</sub></p>
 
 ### Reboots and power loss
 - **Reboot:** no problem. The machine logs itself in, and Tailscale, SSH, VNC, the Claude app, Chrome and Claude RC all come back on their own. If something didn't start or you need anything else, VNC in and start it from the desktop.
