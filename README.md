@@ -61,7 +61,7 @@ That's how this machine was built: Claude Code running on an old Ubuntu 18.04 in
 1. Install Xubuntu 26.04 LTS. Use the default **X11** session, not Wayland: VNC mirroring and xdotool need X11.
 2. Connect Wi-Fi as a **system-wide** connection, with the password saved for all users. It must connect at boot, before anyone logs in. Ethernet is better if you can run a cable.
 3. Install all updates. Keep unattended-upgrades on, with automatic reboot off.
-4. On a laptop with both Intel and NVIDIA graphics: switch to **Intel-only** (PRIME), then reboot.
+4. On a laptop with both Intel and NVIDIA graphics: switch to **Intel-only** (PRIME, `sudo prime-select intel`), then reboot. Why: a 24/7 box with no monitor has no use for the NVIDIA card, but in on-demand mode an older one (here a 940MX) never powers down, so it adds heat and power draw for nothing. The NVIDIA driver also sat in the display path when this machine froze at display standby (see Gotchas). Removing it took out one likely cause. Skip this if NVIDIA is your only GPU, or if you want the card for local AI models.
 
 ## 2. Remote access
 5. **Tailscale:** install it, log in, give the machine a short name, and **turn off key expiry** for it in the Tailscale admin console. Install Tailscale on your phone and computer too.

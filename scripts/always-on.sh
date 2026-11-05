@@ -7,6 +7,8 @@
 #     bash always-on.sh
 # Laptops with Intel + NVIDIA (Optimus) graphics that should go Intel-only:
 #     INTEL_ONLY=1 bash always-on.sh
+# Why: a headless box doesn't need the NVIDIA card, older ones never power down in
+# on-demand mode (heat, power), and its driver was a suspect in a display-standby freeze.
 # Never set INTEL_ONLY on a machine whose only GPU is NVIDIA: it has no display without it.
 #
 # It calls sudo itself for root parts. Every root file is a NEW drop-in; nothing
