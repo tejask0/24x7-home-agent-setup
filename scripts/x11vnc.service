@@ -1,0 +1,20 @@
+# Template: ~/.config/systemd/user/x11vnc.service
+# Mirrors the real desktop :0 over VNC, reachable ONLY on this machine's Tailscale IPs.
+# Replace TAILSCALE_IPV4 and TAILSCALE_IPV6 (see `tailscale ip -4` / `tailscale ip -6`).
+# Set the password first: x11vnc -storepasswd   (writes ~/.vnc/passwd; only 8 chars count)
+# Enable: systemctl --user daemon-reload && systemctl --user enable --now x11vnc
+# Check:  ss -ltnp | grep 5900   -> must show only the Tailscale addresses
+[Unit]
+Description=x11vnc mirror of display :0 (Tailscale only)
+After=graphical-session.target
+
+[Service]
+Environment=DISPLAY=:0 XAUTHORITY=%h/.Xauthority
+# x11vnc's -listen6/-noipv6 did NOT stop it binding [::]; libvncserver's -listenv6 does.
+# Restart=always also covers boot, when the Tailscale IP may not exist yet.
+ExecStart=/usr/bin/x11vnc -display :0 -auth %h/.Xauthority -rfbauth %h/.vnc/passwd -listen TAILSCALE_IPV4 -rfbport 5900 -forever -shared -repeat -noxdamage -no6 -listenv6 TAILSCALE_IPV6 -quiet
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,12 @@
+# Template: ~/.config/autostart/claude-rc.desktop
+# Opens a terminal running Claude Code Remote Control at login.
+# bash -l so ~/.local/bin (where the claude CLI lives) is on PATH.
+# The Claude desktop app and Chrome autostart the same way: copy their entries from
+# /usr/share/applications/ into ~/.config/autostart/.
+[Desktop Entry]
+Type=Application
+Name=Claude RC
+Comment=Claude Code Remote Control
+Exec=xfce4-terminal --title "Claude RC" -x bash -lc "cd ~ && claude rc; exec bash"
+Terminal=false
+X-GNOME-Autostart-enabled=true
