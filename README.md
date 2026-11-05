@@ -106,6 +106,19 @@ That's how this machine was built: Claude Code running on an old Ubuntu 18.04 in
 
 Claude RC is what lets you start and drive Claude Code sessions on this machine from the Claude app on your phone or the web. A normal terminal window on the desktop is enough: the desktop is always logged in and never sleeps, so you don't need tmux or any other persistent terminal.
 
+### Claude RC sessions vs desktop app sessions
+**Sessions started through `claude rc` can't use the desktop app's in-app browser.** That covers any session you start from your phone or another device in the folder where the `claude rc` terminal is running. Only Claude Code sessions started inside the Claude desktop app get its in-app browser.
+
+So I use both:
+
+- **For browser work:** I start two or three Claude Code sessions in the Claude desktop app on this machine and turn on **Remote Control** for each one (the toggle in the session's side panel). They then show up in the Claude app on my phone and on any other device, and I use them interchangeably for anything that needs the browser.
+- **For everything else:** I start a new session from my phone (or any device) in the folder where `claude rc` is running.
+
+<p align="center">
+  <img src="images/claude-desktop-remote-control.png" alt="Claude desktop app on the home machine with a Claude Code session open and Remote Control switched on" width="80%">
+</p>
+<p align="center"><sub>A Claude Code session in the desktop app with Remote Control on (highlighted). Private content is blurred.</sub></p>
+
 ### Reboots and power loss
 - **Reboot:** no problem. The machine logs itself in, and Tailscale, SSH, VNC, the Claude app, Chrome and Claude RC all come back on their own. If something didn't start or you need anything else, VNC in and start it from the desktop.
 - **Full shutdown or power loss:** this is the only case that needs a person.
@@ -157,3 +170,6 @@ Either way your whole desktop is on the public internet. Keep x11vnc itself boun
 - A firewall that allows only the Tailscale interface and the home network.
 - Ethernet instead of Wi-Fi.
 - A dead-man alert: another machine messages you if this one goes offline.
+
+## License
+[MIT](LICENSE)
