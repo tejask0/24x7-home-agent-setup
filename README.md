@@ -52,10 +52,10 @@ The first message went out at 12:13 and the wall was live by 13:33 (IST). One st
 The first step is the one a VPS does badly: WhatsApp Web and my Chrome logins live on this machine, behind a home IP.
 
 <p align="center">
-  <img src="images/phone-browser-preview.png" alt="Claude app on a phone, Remote Control session: the agent checks the face groups, hides non-people and previews the wall in the built-in browser" width="49%">
+  <img src="images/phone-whatsapp-trigger.png" alt="Claude app on a phone, Remote Control session: my request, then the agent opening WhatsApp Web in Chrome to find the photo link" width="49%">
   <img src="images/phone-deploy-live.png" alt="Claude app on a phone, same session: the new photo wall and hub page are live and every URL returns 200" width="49%">
 </p>
-<p align="center"><sub>The session as seen on my phone: checking the face groups and previewing the wall in the in-app browser (left, faces blurred), then live and verified (right).</sub></p>
+<p align="center"><sub>The session as seen on my phone: my request and the agent opening WhatsApp Web to find the link (left), then live and verified (right). Names, site paths and chat previews blurred.</sub></p>
 
 **How to use this guide:** give the whole file to your agent (Claude Code on that machine) and say "set this machine up following this guide". The steps say *what* to do and in *what order*. The agent works out the commands.
 
