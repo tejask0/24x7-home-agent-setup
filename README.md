@@ -31,6 +31,32 @@ A VPS is cheap and reliable, but there are things it can't do:
 
 A VPS still wins for public-facing services and guaranteed uptime: home power, Wi-Fi and laptop hardware fail more often than a datacenter. Use both if you need both.
 
+## Example: a live deploy, driven from my phone
+
+On 6 Nov 2026 I used this machine from my phone to build a photo wall for an event and put it live on my website. The work ran in a Claude Code session in the Claude desktop app on the machine, with Remote Control on. I sent it three short messages from the Claude app on my phone. In short:
+
+1. A friend sent the event photo link on WhatsApp. Make a photo wall like last time, put it on my site, and show me the new links before you deploy.
+2. Yes, it's Google Photos. Go ahead.
+3. The links are fine. Deploy when done.
+
+In between, the session:
+
+- opened WhatsApp Web in my signed-in Chrome (through Claude in Chrome) and found the album link in the chat
+- downloaded the 484 photos and grouped them by face on the machine itself
+- hid 23 groups that weren't people (stage masks, posters, a lamp)
+- previewed the built pages in the desktop app's in-app browser
+- copied the site to my web server and checked that every new URL returned 200
+
+The first message went out at 12:13 and the wall was live by 13:33 (IST). One step failed: an edit to the server's crontab was blocked, so the session left it and told me.
+
+The first step is the one a VPS does badly: WhatsApp Web and my Chrome logins live on this machine, behind a home IP.
+
+<p align="center">
+  <img src="images/phone-browser-preview.png" alt="Claude app on a phone, Remote Control session: the agent checks the face groups, hides non-people and previews the wall in the built-in browser" width="49%">
+  <img src="images/phone-deploy-live.png" alt="Claude app on a phone, same session: the new photo wall and hub page are live and every URL returns 200" width="49%">
+</p>
+<p align="center"><sub>The session as seen on my phone: checking the face groups and previewing the wall in the in-app browser (left, faces blurred), then live and verified (right).</sub></p>
+
 **How to use this guide:** give the whole file to your agent (Claude Code on that machine) and say "set this machine up following this guide". The steps say *what* to do and in *what order*. The agent works out the commands.
 
 ---
