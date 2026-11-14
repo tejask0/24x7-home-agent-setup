@@ -171,6 +171,7 @@ So I use both:
 - **x11vnc and IPv6:** by default x11vnc listens on every IPv6 address. `-noipv6` didn't stop it; only `-listenv6 <tailscale-ipv6>` did. Check which addresses it listens on after every flag change.
 - **VNC password:** only the first 8 characters count.
 - **VNC after a reboot:** x11vnc needs a logged-in desktop. Without automatic login it has nothing to show.
+- **Stuck keys over VNC:** with `-repeat`, x11vnc leaves the X server's key auto-repeat on while you're connected. From an Android VNC viewer app the key-up can arrive late, so X keeps repeating the key until you press the next one, and you can't type. x11vnc's default, `-norepeat`, turns auto-repeat off while a client is connected and typing, which avoids it. So leave `-repeat` out; the unit in `scripts/` no longer has it. To fix a running session without restarting x11vnc, run `DISPLAY=:0 xset r off` on the machine. That lasts until the next login, and the machine's own keyboard won't repeat either.
 - **Keyring:** it stays locked after automatic login unless its password is blank. The trade-off is that saved secrets sit unencrypted on disk, so use full-disk encryption or keep the machine somewhere you trust.
 - **PATH over SSH:** a one-off `ssh host cmd` doesn't load `~/.local/bin`, so node, claude and uv look missing. Use a login shell (`bash -lc`).
 - **Plugin marketplaces:** `claude plugin marketplace add owner/repo` clones over SSH and fails without a GitHub SSH key. Use the full `https://github.com/...git` URL.

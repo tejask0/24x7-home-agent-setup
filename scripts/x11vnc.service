@@ -12,7 +12,9 @@ After=graphical-session.target
 Environment=DISPLAY=:0 XAUTHORITY=%h/.Xauthority
 # x11vnc's -listen6/-noipv6 did NOT stop it binding [::]; libvncserver's -listenv6 does.
 # Restart=always also covers boot, when the Tailscale IP may not exist yet.
-ExecStart=/usr/bin/x11vnc -display :0 -auth %h/.Xauthority -rfbauth %h/.vnc/passwd -listen TAILSCALE_IPV4 -rfbport 5900 -forever -shared -repeat -noxdamage -no6 -listenv6 TAILSCALE_IPV6 -quiet
+# No -repeat: it keeps X key auto-repeat on, and a late key-up from a phone VNC app
+# then repeats the key until the next press. The default (-norepeat) avoids that.
+ExecStart=/usr/bin/x11vnc -display :0 -auth %h/.Xauthority -rfbauth %h/.vnc/passwd -listen TAILSCALE_IPV4 -rfbport 5900 -forever -shared -noxdamage -no6 -listenv6 TAILSCALE_IPV6 -quiet
 Restart=always
 RestartSec=5
 
