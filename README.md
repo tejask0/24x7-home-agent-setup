@@ -111,6 +111,14 @@ That's how this machine was built: Claude Code running on an old Ubuntu 18.04 in
 16. **x11vnc** mirrors the real desktop (display `:0`). Run it as a **user systemd service** that restarts on failure. Protect it with a VNC password, and make it listen **only on the machine's Tailscale addresses** (IPv4 and IPv6).
 17. To connect, use macOS Screen Sharing, or AVNC or RealVNC Viewer on Android, pointed at the machine's Tailscale IP.
 
+**Optional, if VNC feels slow.** Rule out the network first: `tailscale status` should show the viewer's device as `direct`, not `relay`. If it's direct and still slow, the cause is usually x11vnc and the desktop. Each fix below works on its own and can be undone.
+- **Turn off the compositor, then turn on XDAMAGE.** Untick compositing in Window Manager Tweaks (`xfconf-query -c xfwm4 -p /general/use_compositing -s false`), then remove `-noxdamage` from the x11vnc unit. With XDAMAGE, X tells x11vnc which parts of the screen changed, so it stops scanning for them. It gives wrong hints while a compositor runs, so do both or neither. To try it without restarting x11vnc: `DISPLAY=:0 x11vnc -sync -R xdamage`.
+- **Lower the screen resolution**, for example `xrandr --output eDP-1 --mode 1280x720` (plain `xrandr` lists the screen's name and modes). That's 56% fewer pixels than 1080p. Text stays sharp, which x11vnc's `-scale` can't do, but the machine's own screen looks soft. To keep it after a reboot, run the same command from an XFCE autostart entry.
+- **Use a solid background color** instead of a wallpaper image: in Desktop settings, set Style to None. x11vnc's `-solid` option is meant to do this, but it doesn't work on XFCE 4.20.
+- **Lower the color depth in the viewer.** x11vnc has no server setting for it, the viewer picks.
+
+VNC still redraws a full-screen change (scrolling, switching windows) in strips. For video-smooth use, try a remote desktop that streams video, like RustDesk or Sunshine with Moonlight.
+
 ## 5. Browser and desktop control
 18. **Google Chrome:** signed in, with the **Claude in Chrome** extension. Add Firefox if you want it.
 19. **xdotool** is the computer-use tool: it moves the mouse, clicks, types and switches windows. **ffmpeg** takes screenshots of the desktop (x11grab).
